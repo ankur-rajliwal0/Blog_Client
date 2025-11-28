@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Mycontext } from "../../context/context";
 import { useParams } from "react-router-dom";
 
+
+import Gradient from '../../assets/webp/gradientBackground.png';
 const Blogcontent = () => {
   const { id } = useParams();
   const { allblogs, blogs, comments, getComments, addcomments } = Mycontext();
@@ -36,6 +38,10 @@ const Blogcontent = () => {
   return (
     <section>
       <div className="container">
+         <div className="absolute -z-10 top-[-10%]">
+                    <img src={Gradient} alt="Gradient Background" />
+                  </div>
+                  
         <div className="pt-[163px] flex flex-col items-center ">
           <h6 className="text-center text-[#5044E5] font-outfit font-medium text-[18px] leading-[100%]">
             Published on {monthName} {date}, {year}
@@ -43,7 +49,11 @@ const Blogcontent = () => {
           <h2 className="font-outfit font-bold text-[58px] leading-[65px] text-center text-[#3B3B3B] max-w-[900px] py-[30px]">
             {blog.title}
           </h2>
-          <h6>{blog.subtitle}</h6>
+
+          <h6 className=" font-outfit pb-6">{blog.subtitle}</h6>
+            <h5 className="font-outfit font-normal text-[16px] leading-[100%] text-[#5044E5] flex gap-1 border-[0.3px] border-solid border-[#7A7A7A] rounded-[50px] py-2 px-[16px] bg-[#5044E51A]">
+                      Michael Brown
+                    </h5>
           <div className="pt-[60px]  max-w-[1240px] w-full">
             <img
               src={blog.thumbnailUrl}
@@ -51,15 +61,13 @@ const Blogcontent = () => {
               className=" rounded-[25px] w-full"
             />
           </div>
-          <div>
-            <p className="font-outfit text-[#3B3B3B] max-w-[90%] py-16 ">
-              {blog.description}
-            </p>
-          </div>
-        </div>
+          <div  className="w-[80%] pt-20">
+            <h6 className="text-[32px] font-semibold font-outfit">{blog.subtitle}</h6>
 
-        
-        <div className="max-w-[512px] ">
+            
+              <p className="font-outfit text-[#3B3B3B] max-w-[90%] py-16  text-[18px]"  dangerouslySetInnerHTML={{ __html: blog.description }} />
+
+                <div className="max-w-[512px] ">
           <h6 className="font-outfit text-black font-semibold pb-4">
             Comments {comments.length}
           </h6>
@@ -107,6 +115,15 @@ const Blogcontent = () => {
             />
           </form>
         </div>
+
+                      
+
+            
+          </div>
+        </div>
+
+        
+      
       </div>
     </section>
   );

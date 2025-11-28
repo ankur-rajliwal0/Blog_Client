@@ -14,12 +14,15 @@ import Category from "./components/blogs/Category";
 import BlogContentPage from "./pages/BlogContentPage";
 import { Mycontext } from "./context/context";
 import Login from "./components/Auth/Login";
+import 'quill/dist/quill.snow.css'
+
 
 function App() {
   const { role, loading } = Mycontext();
   if (loading) return null;
   return (
     <>
+    
       {role === "admin" && (
         <Routes>
           <Route path="/login" element={<Login />} />

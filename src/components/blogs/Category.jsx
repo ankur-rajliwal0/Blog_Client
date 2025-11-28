@@ -39,12 +39,12 @@ const Category = () => {
                       <span className="font-outfit text-[#5044E5] text-[14px] leading-[100%] bg-[#5044E533] rounded-[50px] py-[6px] px-[17px]">
                         {blog.category}
                       </span>
-                      <h4 className="font-outfit font-medium text-[20px] leading-[30px] py-3">
+                      <h4 className="font-outfit font-medium text-[20px] leading-[30px] pt-3">
                         {blog.title}
                       </h4>
-                      <p className="font-outfit font-medium leading-[28px] text-[#636363] line-clamp-3">
-                        {blog.description}
-                      </p>
+                      
+                         <p className="font-outfit text-[#3B3B3B]    font-thin line-clamp-3"  dangerouslySetInnerHTML={{ __html: blog.description }} />
+                      
                     </div>
                   </div>
 

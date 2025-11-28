@@ -14,7 +14,7 @@ const Blogslist = () => {
   return (
     <section>
       <div className="container pt-[64px]">
-        <div className="overflow-x-scroll  z-10 ">
+        <div className="  max-md:overflow-x-scroll z-10 ">
           <div className="flex sm:gap-[20px] gap-2 sm:justify-center items-center max-sm:w-[600px]  max-sm:px-1  h-10 flex-wrap ">
             {categorys.map((category, index) => (
               <NavLink

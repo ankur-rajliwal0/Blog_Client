@@ -30,16 +30,23 @@ const Allblog = () => {
             >
               <Link to={`/blogcontent/${blog._id}`}>
                 <div className=" shadow-card rounded-[15px]  overflow-hidden h-full hover:shadow-xl duration-300">
-                  <img src={blog.thumbnailUrl} alt="" className="w-full" />
+                <div className="w-full h-[200px] overflow-hidden rounded-lg">
+  <img 
+    src={blog.thumbnailUrl} 
+    alt=""
+    className="w-full h-full object-cover"
+  />
+</div>
+
                   <div className="pt-5 px-[28px] pb-[40px]">
                     <span className="font-outfit text-[#5044E5] text-[14px] leading-[100%] bg-[#5044E533] rounded-[50px] py-[6px] px-[17px]">
                       {blog.category}
                     </span>
-                    <h4 className="font-outfit font-medium text-[20px] leading-[30px] py-3">
+                    <h4 className="font-outfit font-medium text-[20px] leading-[30px] pt-3">
                       {blog.title}
                     </h4>
-                    <p className="font-outfit font-medium leading-[28px] text-[#636363] line-clamp-3">
-                      {blog.description}
+                    <p className="font-outfit font-thin leading-[28px] text-[#636363] line-clamp-3">
+                        <p className=""  dangerouslySetInnerHTML={{ __html: blog.description }} />
                     </p>
                   </div>
                 </div>

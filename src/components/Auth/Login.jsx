@@ -1,88 +1,66 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mycontext } from "../../context/context";
-import { Back } from "../../common/icon";
-import { jwtDecode  } from 'jwt-decode';
-
+import { jwtDecode } from "jwt-decode";
+import Message from "../common/Message";
 
 const Login = () => {
   const { login } = Mycontext();
   const [formdata, setFormdata] = useState({ email: "", password: "" });
+
   const [message, setMessage] = useState("");
   const [showBar, setShowBar] = useState(false);
+
   const navigate = useNavigate();
-  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setRole(decoded.role);
-      } catch {
+        console.log("Role:", decoded.role);
+      } catch (err) {
         console.error("Bad token");
       }
     }
   }, []);
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await login(formdata);
 
+    // Show global message
+    setMessage(res?.message || "Login successful");
+    setShowBar(true);
 
+    // Handle navigation
+    const token = localStorage.getItem("token");
 
-  const res = await login(formdata);
-  console.log("res" ,res)
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const userRole = decoded.role;
 
-  
-    
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const decoded = jwtDecode(token);          
-          const userRole = decoded.role;          
-          if (userRole === "admin"){        
-            setMessage(res.message)
-            setShowBar(true)
-           setTimeout(() => {            
-             navigate("/dashboard");            
-           }, 2500);
-          }
-          else {                        
-          
+        setTimeout(() => {
+          setMessage("");
+          setShowBar(false);
+          setFormdata({ email: "", password: "" });
 
-            setTimeout(() => {
-                setMessage(res.message)
-            setShowBar(true)
-              
-            }, 2000);
-             setTimeout(() => {
-              navigate("/all")
-              
-            }, 0);
-          }
-        } catch (err) {
-          console.error("Invalid token");
-        }
+          if (userRole === "admin") navigate("/dashboard");
+          else navigate("/all");
+        }, 3000);
+
+      } catch {
+        console.error("Invalid token");
       }
-      setFormdata({ email: "", password: "" });
-
-};
-
-
-
+    }
+  };
 
   return (
     <section className="min-h-screen flex items-center relative">
-  
 
-      {message && (
-        <div className="shadow-lg rounded-md py-2 px-4 absolute top-[4%] left-1/2 -translate-x-1/2 bg-white text-center text-black font-medium z-50 w-[300px]">
-          {message}
-          {showBar && (
-            <div className="h-1 bg-blue-500 mt-2 rounded-full animate-progress" />
-          )}
-        </div>
-      )}
+      {/* ⭐ Message Component */}
+      <Message message={message} showBar={showBar} />
 
       <div className="container flex justify-center">
         <form
@@ -100,7 +78,9 @@ const Login = () => {
             type="email"
             id="email"
             value={formdata.email}
-            onChange={(e) => setFormdata({ ...formdata, email: e.target.value })}
+            onChange={(e) =>
+              setFormdata({ ...formdata, email: e.target.value })
+            }
             placeholder="Enter your email"
             className="w-full text-[#808080] outline-none p-2 border-b border-[#808080] mb-5"
           />
@@ -112,7 +92,9 @@ const Login = () => {
             type="password"
             id="password"
             value={formdata.password}
-            onChange={(e) => setFormdata({ ...formdata, password: e.target.value })}
+            onChange={(e) =>
+              setFormdata({ ...formdata, password: e.target.value })
+            }
             placeholder="Enter your password"
             className="w-full text-[#808080] outline-none p-2 border-b border-[#808080] mb-5"
           />

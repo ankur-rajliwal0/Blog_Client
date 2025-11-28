@@ -41,11 +41,11 @@ export const ContextProvider = ({ children }) => {
     try {
       const response = await api.post("/auth/login", formdata);
       localStorage.setItem("token", response.data.token);
-
       const decoded = jwtDecode(response.data.token);
       setRole(decoded.role);
 
-      return { success: true, message: response.data.message };
+      // return { success: true, message: response.data.message };
+      return response.data
     } catch (error) {
       console.log(error);
       return { success: false, message: error.response.data.message };
@@ -66,19 +66,25 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  const addblog = async (formdata) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await api.post("/blog/addblog", formdata, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ const addblog = async (formdata) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await api.post("/blog/addblog", formdata, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return { success: true, message: response.data.message || "Blog added successfully!" };
+
+  } catch (error) {
+    return { 
+      success: false, 
+      message: error?.response?.data?.message || "Something went wrong!" 
+    };
+  }
+};
+
   const allblogs = async () => {
     try {
       const response = await api.get("/blog/allblogs");
