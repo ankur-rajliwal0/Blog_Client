@@ -78,7 +78,7 @@ const Addblogs = () => {
     setTimeout(() => {
       setMessage("");
       setShowBar(false);
-    }, 3000);
+    }, 2000);
 
     if (res?.success) {
       setFormdata({

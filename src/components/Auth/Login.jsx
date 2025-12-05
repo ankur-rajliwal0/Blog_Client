@@ -48,7 +48,7 @@ const Login = () => {
 
           if (userRole === "admin") navigate("/dashboard");
           else navigate("/all");
-        }, 3000);
+        }, 2000);
 
       } catch {
         console.error("Invalid token");

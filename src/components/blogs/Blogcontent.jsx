@@ -11,6 +11,7 @@ const Blogcontent = () => {
   const [addcomment, setAddcomment] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     allblogs();
     getComments(id);
   }, [id]);
@@ -42,11 +43,11 @@ const Blogcontent = () => {
                     <img src={Gradient} alt="Gradient Background" />
                   </div>
                   
-        <div className="pt-[163px] flex flex-col items-center ">
+        <div className="sm:pt-[163px] pt-[120px] flex flex-col items-center ">
           <h6 className="text-center text-[#5044E5] font-outfit font-medium text-[18px] leading-[100%]">
             Published on {monthName} {date}, {year}
           </h6>
-          <h2 className="font-outfit font-bold text-[58px] leading-[65px] text-center text-[#3B3B3B] max-w-[900px] py-[30px]">
+          <h2 className="font-outfit font-bold sm:text-[58px] text-[32px] leading-[50px] sm:leading-[65px] text-center text-[#3B3B3B] max-w-[900px] py-[30px]">
             {blog.title}
           </h2>
 
@@ -54,14 +55,14 @@ const Blogcontent = () => {
             <h5 className="font-outfit font-normal text-[16px] leading-[100%] text-[#5044E5] flex gap-1 border-[0.3px] border-solid border-[#7A7A7A] rounded-[50px] py-2 px-[16px] bg-[#5044E51A]">
                       Michael Brown
                     </h5>
-          <div className="pt-[60px]  max-w-[1240px] w-full">
+          <div className="sm:pt-[60px] pt-10  max-w-[1240px] w-full">
             <img
               src={blog.thumbnailUrl}
               alt=""
               className=" rounded-[25px] w-full"
             />
           </div>
-          <div  className="w-[80%] pt-20">
+          <div  className="sm:w-[80%] w-full sm:pt-20 pt-10">
             <h6 className="text-[32px] font-semibold font-outfit">{blog.subtitle}</h6>
 
             

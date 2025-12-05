@@ -87,9 +87,7 @@ export const ContextProvider = ({ children }) => {
 
   const allblogs = async () => {
     try {
-      const response = await api.get("/blog/allblogs");
-      console.log("Fetching all blogs...");
-      console.log("Response:", response.data);
+      const response = await api.get("/blog/allblogs");            
       setBlogs(response.data.blogs);
     } catch (error) {
       console.log(error);

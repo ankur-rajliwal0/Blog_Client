@@ -98,9 +98,11 @@ const Home = () => {
                       <h4 className="font-outfit font-medium text-[20px] leading-[30px] py-3">
                         {blog.title}
                       </h4>
-                      <p className="font-outfit font-medium leading-[28px] text-[#636363] line-clamp-3">
-                        {blog.description}
-                      </p>
+                         <div
+                    className="font-outfit font-thin leading-[28px] text-[#636363] line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: blog.description }}
+                  ></div>
+                    
                     </div>
                   </div>
             </div>
